@@ -60,31 +60,31 @@ class OrderingProduct extends StatelessWidget {
               const SizedBox(
                 height: 10,
               ),
-              CustomDropDwon(
-                  currentValue: currentValue,
-                  list: _list,
-                  onSelect: (value) {},
-                  textHint: "النمط"),
-              CustomDropDwon(
-                  currentValue: currentValue,
-                  list: _list,
-                  onSelect: (value) {},
-                  textHint: "ماركت"),
-              CustomDropDwon(
-                  currentValue: currentValue,
-                  list: _list,
-                  onSelect: (value) {},
-                  textHint: "الموديل"),
-              CustomDropDwon(
-                  currentValue: currentValue,
-                  list: _list,
-                  onSelect: (value) {},
-                  textHint: "سنة الصنع"),
-              CustomDropDwon(
-                  currentValue: currentValue,
-                  list: _list,
-                  onSelect: (value) {},
-                  textHint: "فئة السيارة"),
+              // CustomDropDwon(
+              //     currentValue: currentValue,
+              //     list: _list,
+              //     onSelect: (value) {},
+              //     textHint: "النمط"),
+              // CustomDropDwon(
+              //     currentValue: currentValue,
+              //     list: _list,
+              //     onSelect: (value) {},
+              //     textHint: "ماركت"),
+              // CustomDropDwon(
+              //     currentValue: currentValue,
+              //     list: _list,
+              //     onSelect: (value) {},
+              //     textHint: "الموديل"),
+              // CustomDropDwon(
+              //     currentValue: currentValue,
+              //     list: _list,
+              //     onSelect: (value) {},
+              //     textHint: "سنة الصنع"),
+              // CustomDropDwon(
+              //     currentValue: currentValue,
+              //     list: _list,
+              //     onSelect: (value) {},
+              //     textHint: "فئة السيارة"),
 
               DetailsProduct(
                 ditailsController: _detProController,
@@ -235,39 +235,39 @@ class DetailsProduct extends StatelessWidget {
   }
 }
 
-class CustomDropDwon extends StatelessWidget {
-  final String? currentValue;
-  final List<String> list;
-  final String textHint;
-  final void Function(dynamic) onSelect;
+// class CustomDropDwon extends StatelessWidget {
+//   final String? currentValue;
+//   final List<String> list;
+//   final String textHint;
+//   final void Function(dynamic) onSelect;
 
-  CustomDropDwon(
-      {this.currentValue,
-      required this.list,
-      required this.textHint,
-      required this.onSelect});
+//   CustomDropDwon(
+//       {this.currentValue,
+//       required this.list,
+//       required this.textHint,
+//       required this.onSelect});
 
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      height: 50,
-      margin: const EdgeInsets.only(bottom: 10),
-      decoration: BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.circular(10),
-      ),
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 12.0,vertical: 3),
-        child: CustomDropDownWidget(
-            currentValue: currentValue,
-            selectCar: false,
-            textColor: Colors.black26,
-            isTwoIcons: false,
-            iconColor: const Color(0xff515151),
-            list: list,
-            onSelect: onSelect,
-            hint:textHint),
-      ),
-    );
-  }
-}
+//   @override
+//   Widget build(BuildContext context) {
+//     return Container(
+//       height: 50,
+//       margin: const EdgeInsets.only(bottom: 10),
+//       decoration: BoxDecoration(
+//         color: Colors.white,
+//         borderRadius: BorderRadius.circular(10),
+//       ),
+//       child: Padding(
+//         padding: const EdgeInsets.symmetric(horizontal: 12.0,vertical: 3),
+//         child: CustomDropDownWidget(
+//             currentValue: currentValue,
+//             selectCar: false,
+//             textColor: Colors.black26,
+//             isTwoIcons: false,
+//             iconColor: const Color(0xff515151),
+//             list: list,
+//             onSelect: onSelect,
+//             hint:textHint),
+//       ),
+//     );
+//   }
+// }

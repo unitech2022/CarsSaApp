@@ -1,4 +1,4 @@
-import 'package:badges/badges.dart';
+import 'package:badges/badges.dart' as badges;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -61,9 +61,9 @@ class _DetailsProductByIdState extends State<DetailsProductById> {
               },
               builder: (context, state) {
                 return CartCubit.get(context).carts.isNotEmpty
-                    ? Badge(
-                  position: BadgePosition.topStart(start: 1),
-                  badgeContent:
+                    ? badges.Badge(
+                  position: badges.BadgePosition.topStart(start: 1),
+                 badgeContent:
                   Text('${CartCubit.get(context).carts.length}',style: TextStyle(color: Colors.white),),
                   child: Padding(
                     padding: const EdgeInsets.only(bottom: 50.0),

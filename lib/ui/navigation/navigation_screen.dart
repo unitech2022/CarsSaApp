@@ -10,7 +10,7 @@ import 'package:carsa/ui/workshops_screen/workshops_screen.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/foundation.dart';
 
-import 'package:badges/badges.dart';
+import 'package:badges/badges.dart' as badges;
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -93,8 +93,8 @@ class _NavigationScreenState extends State<NavigationScreen> {
               BottomNavigationBarItem(
                   icon: Icon(Icons.home), label: 'الرئيسية'),
               BottomNavigationBarItem(
-                  icon: Badge(
-                      position: BadgePosition.topStart(
+                  icon: badges.Badge(
+                      position: badges.BadgePosition.topStart(
                         start: -1,
                       ),
                       badgeContent: CartCubit.get(context).carts.isEmpty

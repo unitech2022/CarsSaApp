@@ -18,6 +18,7 @@ import '../../helpers/helper_function.dart';
 import '../../helpers/styles.dart';
 import '../../widgets/custom_button.dart';
 import '../../widgets/text_widget.dart';
+import '../privacy_html_screen/privacy_html_screen/privacy_html_screen.dart';
 import 'componts/bar_my_profile.dart';
 import 'componts/container_profile_text.dart';
 
@@ -160,9 +161,8 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
                                         onPress: () {
                                           pushPage(
                                               context: context,
-                                              page: PrivacyPolicyScreen(
-                                              value:AppCubit.get(context).homeModel.sittings![1].value!,
-                                          title:AppCubit.get(context).homeModel.sittings![1].name!));
+                                              page: PrivacyHtmlScreen(
+                                          ));
                                         },
                                       ),
                                       ContainerProfileText(

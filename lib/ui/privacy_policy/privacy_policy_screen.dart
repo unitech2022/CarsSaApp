@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_html/flutter_html.dart';
 
 import '../../helpers/constants.dart';
+import '../../helpers/data.dart';
 import '../../helpers/functions.dart';
 import '../../helpers/styles.dart';
 
@@ -41,13 +43,11 @@ class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-          child:  Text(
-                widget.status == 1
-              ?htmlData:  widget.value,
-                  textAlign: TextAlign.start,
-                  style: TextStyle(
-                      fontFamily: "pnuB", fontSize: 16, color: homeColor),
-                ),
+          child:  SingleChildScrollView(
+        child: Html(
+        data: htmlData,
+      ),
+      ),
         ),
       ),
     );

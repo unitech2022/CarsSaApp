@@ -8,7 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:modal_bottom_sheet/modal_bottom_sheet.dart';
 
 import '../../bloc/post_cubit/post_cubit.dart';
 import '../../helpers/functions.dart';
@@ -174,13 +173,13 @@ class _WorkshopDetailsState extends State<WorkshopDetails> {
                               ),
                               Row(
                                 children: [
-
                                   Expanded(
                                     child: Texts(
                                       fSize: 15,
                                       weight: FontWeight.normal,
                                       color: Colors.red,
-                                      title: "ملحوظة : التطبيق غير مسئول عن الورشة ويتحمل المسئولية صاحب الورشة",
+                                      title:
+                                          "ملحوظة : التطبيق غير مسئول عن الورشة ويتحمل المسئولية صاحب الورشة",
                                       lines: 2,
                                     ),
                                   )
@@ -214,7 +213,7 @@ class _WorkshopDetailsState extends State<WorkshopDetails> {
                                   ),
                                   GestureDetector(
                                     onTap: () {
-                                      showMaterialModalBottomSheet(
+                                      showBottomSheet(
                                         context: context,
                                         builder: (context) => BlocConsumer<
                                             WorkshopCubit, WorkshopState>(
@@ -223,9 +222,9 @@ class _WorkshopDetailsState extends State<WorkshopDetails> {
                                           },
                                           builder: (context, state) {
                                             return SingleChildScrollView(
-                                              controller:
-                                                  ModalScrollController.of(
-                                                      context),
+                                              // controller:
+                                              //     ModalScrollController.of(
+                                              //         context),
                                               child: Padding(
                                                 padding: MediaQuery.of(context)
                                                     .viewInsets,
@@ -380,32 +379,35 @@ class _WorkshopDetailsState extends State<WorkshopDetails> {
                               SizedBox(
                                 height: 20,
                               ),
-                           WorkshopCubit.get(context)
+                              WorkshopCubit.get(context)
                                       .workshops!
-                                      .rates!.isEmpty?SizedBox() :  SizedBox(
-                                  width: double.infinity,
-                                  child: Texts(
-                                    fSize: 16,
-                                    weight: FontWeight.bold,
-                                    color: Colors.black,
-                                    title: "تقييم العملاء",
-                                    lines: null,
-                                  )),
+                                      .rates!
+                                      .isEmpty
+                                  ? SizedBox()
+                                  : SizedBox(
+                                      width: double.infinity,
+                                      child: Texts(
+                                        fSize: 16,
+                                        weight: FontWeight.bold,
+                                        color: Colors.black,
+                                        title: "تقييم العملاء",
+                                        lines: null,
+                                      )),
                               SizedBox(
                                 height: 10,
                               ),
                               ListView.builder(
-                                physics: NeverScrollableScrollPhysics(),
-                                shrinkWrap: true,
+                                  physics: NeverScrollableScrollPhysics(),
+                                  shrinkWrap: true,
                                   itemCount: WorkshopCubit.get(context)
                                       .workshops!
                                       .rates!
                                       .length,
                                   itemBuilder: (context, index) {
-
-                                    RateResponse rate=WorkshopCubit.get(context)
-                                      .workshops!
-                                      .rates![index];
+                                    RateResponse rate =
+                                        WorkshopCubit.get(context)
+                                            .workshops!
+                                            .rates![index];
                                     return Container(
                                       margin: EdgeInsets.only(bottom: 5),
                                       height: 80,
@@ -415,73 +417,88 @@ class _WorkshopDetailsState extends State<WorkshopDetails> {
                                           borderRadius:
                                               BorderRadius.circular(10),
                                           color: Colors.white),
-                                          child: Row(
-                                            crossAxisAlignment: CrossAxisAlignment.center,
-                              children: [
-                                Container(
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(50),
-                                      border: Border.all(
-                                          color: Colors.grey, width: 1.5)),
-                                  child: ClipRRect(
-                                    borderRadius: BorderRadius.circular(50),
-                                    child: CachedNetworkImage(
-                                      imageUrl:rate.userImage !=null? baseurlImage +
-                                          rate.userImage!:"notfound",
-                                      width: 45,
-                                      height: 45,
-                                      fit: BoxFit.cover,
-                                      errorWidget: (context, url, error) => Icon(Icons.person,color: Colors.grey,size: 40,),
-                                    ),
-                                  ),
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                Expanded(
-                                    child: Column(
-                                      mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Texts(
-                                          fSize: 16,
-                                          weight: FontWeight.bold,
-                                          color: Colors.black,
-                                          title: rate.userName,
-                                          lines: 1,
-                                        ),
-                                         RatingBarWidget(
-                                              emptColor: Colors.grey,
-                                              fillColor: Color.fromARGB(
-                                                  255, 249, 205, 93),
-                                              itemSize: 12,
-                                              onRate: (rating) {},
-                                              ratingValue: rate.rate!.stare!.toDouble(),
+                                      child: Row(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.center,
+                                        children: [
+                                          Container(
+                                            decoration: BoxDecoration(
+                                                borderRadius:
+                                                    BorderRadius.circular(50),
+                                                border: Border.all(
+                                                    color: Colors.grey,
+                                                    width: 1.5)),
+                                            child: ClipRRect(
+                                              borderRadius:
+                                                  BorderRadius.circular(50),
+                                              child: CachedNetworkImage(
+                                                imageUrl: rate.userImage != null
+                                                    ? baseurlImage +
+                                                        rate.userImage!
+                                                    : "notfound",
+                                                width: 45,
+                                                height: 45,
+                                                fit: BoxFit.cover,
+                                                errorWidget:
+                                                    (context, url, error) =>
+                                                        Icon(
+                                                  Icons.person,
+                                                  color: Colors.grey,
+                                                  size: 40,
+                                                ),
+                                              ),
                                             ),
-                                         
-                                      ],
-                                    ),
-                                    SizedBox(
-                                      height: 10,
-                                    ),
-                                    SizedBox(
-                                        width: 240,
-                                        child: Texts(
-                                          fSize: 16,
-                                          weight: FontWeight.normal,
-                                          color: Colors.grey,
-                                          title:
-                                             rate.rate!.comment,
-                                          lines: 2,
-                                        ))
-                                  ],
-                                ))
-                              ],
-                            ),
+                                          ),
+                                          SizedBox(
+                                            width: 10,
+                                          ),
+                                          Expanded(
+                                              child: Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            crossAxisAlignment:
+                                                CrossAxisAlignment.start,
+                                            children: [
+                                              Row(
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment
+                                                        .spaceBetween,
+                                                children: [
+                                                  Texts(
+                                                    fSize: 16,
+                                                    weight: FontWeight.bold,
+                                                    color: Colors.black,
+                                                    title: rate.userName,
+                                                    lines: 1,
+                                                  ),
+                                                  RatingBarWidget(
+                                                    emptColor: Colors.grey,
+                                                    fillColor: Color.fromARGB(
+                                                        255, 249, 205, 93),
+                                                    itemSize: 12,
+                                                    onRate: (rating) {},
+                                                    ratingValue: rate
+                                                        .rate!.stare!
+                                                        .toDouble(),
+                                                  ),
+                                                ],
+                                              ),
+                                              SizedBox(
+                                                height: 10,
+                                              ),
+                                              SizedBox(
+                                                  width: 240,
+                                                  child: Texts(
+                                                    fSize: 16,
+                                                    weight: FontWeight.normal,
+                                                    color: Colors.grey,
+                                                    title: rate.rate!.comment,
+                                                    lines: 2,
+                                                  ))
+                                            ],
+                                          ))
+                                        ],
+                                      ),
                                     );
                                   })
                             ]),

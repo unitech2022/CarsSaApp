@@ -127,26 +127,26 @@ class FieldSpinner extends StatelessWidget {
         const SizedBox(
           height: 10,
         ),
-        Container(
-          height: 50,
-          decoration: BoxDecoration(
-            color: Colors.white,
-            borderRadius: BorderRadius.circular(10),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 12.0),
-            child: CustomDropDownWidget(
-                currentValue: currentValue,
-                selectCar: false,
-                textColor: Colors.black26,
-                isTwoIcons: false,
-                iconColor: const Color(0xff515151),
-                list: list,
-                onSelect: onSelect,
-                hint: "ملاكى"),
-          ),
+        // Container(
+        //   height: 50,
+        //   decoration: BoxDecoration(
+        //     color: Colors.white,
+        //     borderRadius: BorderRadius.circular(10),
+        //   ),
+        //   child: Padding(
+        //     padding: const EdgeInsets.symmetric(horizontal: 12.0),
+        //     child: CustomDropDownWidget(
+        //         currentValue: currentValue,
+        //         selectCar: false,
+        //         textColor: Colors.black26,
+        //         isTwoIcons: false,
+        //         iconColor: const Color(0xff515151),
+        //         list: list,
+        //         onSelect: onSelect,
+        //         hint: "ملاكى"),
+        //   ),
 
-        ),
+        // ),
 
 
 

@@ -1,4 +1,4 @@
-import 'package:badges/badges.dart';
+import 'package:badges/badges.dart' as badges;
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carsa/bloc/cart_cubite/cart_cubit.dart';
 import 'package:carsa/helpers/constants.dart';
@@ -60,8 +60,8 @@ class _DetailsProductScreenState extends State<DetailsProductScreen> {
               },
               builder: (context, state) {
                 return CartCubit.get(context).carts.isNotEmpty
-                    ? Badge(
-                        position: BadgePosition.topStart(start: 1),
+                    ? badges.Badge(
+                        position: badges.BadgePosition.topStart(start: 1),
                         badgeContent: Text(
                           '${CartCubit.get(context).carts.length}',
                           style: TextStyle(color: Colors.white),
