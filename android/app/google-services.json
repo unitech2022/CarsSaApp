@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "1021214913981",
+    "project_id": "carsa-9d7cf",
+    "storage_bucket": "carsa-9d7cf.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1021214913981:android:c2355e2b8a2c622bf98ed4",
+        "android_client_info": {
+          "package_name": "com.carsa.carsa"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1021214913981-5fbcogu7g9j4r45lbrnsdkoml3m63ir9.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.carsa.carsa",
+            "certificate_hash": "7602e79e4834ea79e6b9bc88fb98f25cfc468733"
+          }
+        },
+        {
+          "client_id": "1021214913981-t7al35qbe83m4c9t1kc4r5s42a1h66sm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.carsa.carsa",
+            "certificate_hash": "e8a83b664d421bebe34b822856af1f596a3cb4cd"
+          }
+        },
+        {
+          "client_id": "1021214913981-vkovh5dn3cl70v27550l2uqhi29icvi9.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPUnI9fPpK_xpqI1K6LGgr175SAjRz1nc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1021214913981-vkovh5dn3cl70v27550l2uqhi29icvi9.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
