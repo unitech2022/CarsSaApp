@@ -4,10 +4,8 @@ import 'package:carsa/models/order.dart';
 import 'package:carsa/ui/my-orders-screen/details_order.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../helpers/functions.dart';
 import '../../helpers/styles.dart';
 
@@ -173,7 +171,7 @@ class _MyOrdersScreenState extends State<MyOrdersScreen> {
 
 class RichTextOrder extends StatelessWidget {
   final String lable, value;
-  Color color;
+ final Color color;
 
   RichTextOrder(
       {required this.lable, required this.value, this.color = Colors.black});

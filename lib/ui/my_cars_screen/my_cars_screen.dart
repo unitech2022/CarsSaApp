@@ -8,7 +8,7 @@ import '../../widgets/custom_text.dart';
 import '../../widgets/text_widget.dart';
 
 class MyCarsScreen extends StatelessWidget {
-  List<String> _list = ["ajs", "hsjs"];
+
 
   @override
   Widget build(BuildContext context) {

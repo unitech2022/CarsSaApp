@@ -1,17 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carsa/bloc/app_cubit/app_cubit.dart';
-
 import 'package:carsa/helpers/functions.dart';
-import 'package:carsa/helpers/router.dart';
 import 'package:carsa/models/home_model.dart';
 import 'package:carsa/ui/home_screen/componts/rating_best.dart';
 import 'package:flutter/cupertino.dart';
-
 import 'package:flutter/material.dart';
-
 import '../../../helpers/constants.dart';
 import '../../../helpers/styles.dart';
-
 import '../../../widgets/text_widget.dart';
 import '../../details_product_screen/details_product_screen.dart';
 

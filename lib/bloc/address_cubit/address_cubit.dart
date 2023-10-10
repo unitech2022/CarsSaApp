@@ -1,9 +1,9 @@
-
 import 'dart:convert';
 
 import 'package:carsa/models/address.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:geocoding/geocoding.dart';
 import 'package:meta/meta.dart';
 
 import '../../helpers/constants.dart';
@@ -14,18 +14,13 @@ part 'address_state.dart';
 class AddressCubit extends Cubit<AddressState> {
   AddressCubit() : super(AddressInitial());
 
-
   static AddressCubit get(context) => BlocProvider.of<AddressCubit>(context);
-
-
-
 
   List<Address> addresses = [];
 
-  bool loadGetAddresses=false;
+  bool loadGetAddresses = false;
   getAddresses() async {
-
-    loadGetAddresses=true;
+    loadGetAddresses = true;
     emit(GetAddressDataLoad());
 
     var headers = {
@@ -46,7 +41,7 @@ class AddressCubit extends Cubit<AddressState> {
       decode.forEach((v) {
         addresses.add(Address.fromJson(v));
       });
-      loadGetAddresses=false;
+      loadGetAddresses = false;
       printFunction("cart=${addresses.length}");
       emit(GetAddressDataSuccess(addresses));
     } else {
@@ -54,7 +49,6 @@ class AddressCubit extends Cubit<AddressState> {
       emit(GetAddressDataError());
     }
   }
-
 
   Future deleteAddress(int id) async {
     // emit(DeleteCartGetDataLoad());
@@ -69,7 +63,7 @@ class AddressCubit extends Cubit<AddressState> {
     };
 
     http.StreamedResponse response =
-    await httpPost(id, params, deleteAddressPoint);
+        await httpPost(id, params, deleteAddressPoint);
 
     if (response.statusCode == 200) {
       String jsonsDataString = await response.stream.bytesToString();
@@ -94,7 +88,6 @@ class AddressCubit extends Cubit<AddressState> {
         });
 
         emit(DeleteAddressDataSuccess(jsonData));
-
       }
 
       //
@@ -104,17 +97,27 @@ class AddressCubit extends Cubit<AddressState> {
     }
   }
 
+  bool loadMoveing = false;
+  String address = "";
+  Future getLocationAddress(lat, lng) async {
+    loadMoveing = true;
+    emit(MoveMapState(""));
+    List<Placemark> placemarks = await placemarkFromCoordinates(lat, lng);
 
+    address =
+        "${placemarks[0].name},${placemarks[0].country},${placemarks[0].street}";
+    print(address );
+    loadMoveing = false;
+    emit(MoveMapState(address));
+  }
 
-  bool loadChangAddress=false;
+  bool loadChangAddress = false;
 
-Future updateAddress(Address address) async {
-    loadChangAddress=true;
+  Future updateAddress(Address address) async {
+    loadChangAddress = true;
     emit(UpdateAddressDataLoad());
     var headers = {
       "Authorization": token,
-
-
     };
 
     final params = {
@@ -123,11 +126,10 @@ Future updateAddress(Address address) async {
       "Lable": address.lable.toString(),
       "Lat": address.lat.toString(),
       "Lng": address.lng.toString(),
-
     };
 
     var request =
-    http.MultipartRequest('POST', Uri.parse(baseUrl + updateAddressPoint));
+        http.MultipartRequest('POST', Uri.parse(baseUrl + updateAddressPoint));
     request.fields.addAll(params);
 
     request.headers.addAll(headers);
@@ -137,31 +139,25 @@ Future updateAddress(Address address) async {
     if (response.statusCode == 204) {
       String jsonsDataString = await response.stream.bytesToString();
       final jsonData = jsonDecode(jsonsDataString);
-      loadChangAddress=false;
+      loadChangAddress = false;
       printFunction(jsonData);
       // print(homeModel.categories!.length);
-     emit(UpdateAddressDataSuccess("decode"));
+      emit(UpdateAddressDataSuccess("decode"));
     } else {
-      loadChangAddress=false;
+      loadChangAddress = false;
       printFunction(response.statusCode);
       emit(UpdateAddressDataError());
     }
   }
 
-
-  Future  addAddress(Address address) async {
-    loadChangAddress=true;
+  Future addAddress(Address address) async {
+    loadChangAddress = true;
     emit(AddAddressDataLoad());
 
-
-
-    var headers = {
-      'Authorization': token
-    };
+    var headers = {'Authorization': token};
     var request =
-    http.MultipartRequest('POST', Uri.parse(baseUrl + addAddressPoint));
+        http.MultipartRequest('POST', Uri.parse(baseUrl + addAddressPoint));
     request.fields.addAll({
-
       "UserId": "${address.userId}",
       "Lable": address.lable.toString(),
       "Lat": address.lat.toString(),
@@ -176,17 +172,14 @@ Future updateAddress(Address address) async {
       String jsonsDataString = await response.stream.bytesToString();
       final jsonData = jsonDecode(jsonsDataString);
 
-      loadChangAddress=false;
+      loadChangAddress = false;
       printFunction(jsonData);
       emit(AddAddressSuccess());
-
     } else {
-
-      loadChangAddress=false;
+      loadChangAddress = false;
       emit(AddAddressError());
     }
   }
-
 
   Future<http.StreamedResponse> httpPost(
       int id, Map<String, String> params, endPoint) async {
@@ -195,8 +188,7 @@ Future updateAddress(Address address) async {
 
       // If  needed
     };
-    var request =
-    http.MultipartRequest('POST', Uri.parse(baseUrl + endPoint));
+    var request = http.MultipartRequest('POST', Uri.parse(baseUrl + endPoint));
     request.fields.addAll({'id': "$id"});
 
     request.headers.addAll(headers);
@@ -204,11 +196,10 @@ Future updateAddress(Address address) async {
     http.StreamedResponse response = await request.send();
     return response;
   }
-int selectedRadio=0;
+
+  int selectedRadio = 0;
   changeValue(int val) {
-
-      selectedRadio = val;
-   emit(ChangeValueRadioState());
+    selectedRadio = val;
+    emit(ChangeValueRadioState());
   }
-
 }

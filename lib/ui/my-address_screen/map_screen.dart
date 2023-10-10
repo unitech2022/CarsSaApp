@@ -21,6 +21,8 @@ class MapScreen extends StatelessWidget {
   int addressId;
   Address address;
 
+  bool loading = false;
+
   MapScreen(
       {this.latitude,
       this.longitude,
@@ -57,48 +59,47 @@ class MapScreen extends StatelessWidget {
     _controllertext.text = lable;
     return BlocConsumer<AddressCubit, AddressState>(
       listener: (context, state) {
-        // TODO: implement listener
+        if (state is MoveMapState) {
+          _controllertext.text = state.address;
+        }
       },
       builder: (context, state) {
         return Scaffold(
           body: Stack(
             children: [
-              Padding(
-                padding: const EdgeInsets.only(bottom: 270.0),
-                child: GoogleMap(
-                  mapType: MapType.normal,
-                  initialCameraPosition: _kGooglePlex,
-                  myLocationButtonEnabled: true,
-                  buildingsEnabled: true,
-                  compassEnabled: true,
-                  indoorViewEnabled: true,
-                  mapToolbarEnabled: true,
-                  rotateGesturesEnabled: true,
-                  scrollGesturesEnabled: true,
-                  tiltGesturesEnabled: true,
-                  trafficEnabled: true,
-                  zoomControlsEnabled: true,
-                  zoomGesturesEnabled: true,
-                  myLocationEnabled: true,
-                  onCameraMove: (object) {
-                    latitude = object.target.latitude;
-                    longitude = object.target.longitude;
-                    getAddresses(object.target.latitude,object.target.longitude);
-                  },
-                  onMapCreated: (GoogleMapController controller) {
-                    _controller.complete(controller);
-                    setInitialLocation();
-                  },
-                ),
+              GoogleMap(
+                mapType: MapType.normal,
+                initialCameraPosition: _kGooglePlex,
+                myLocationButtonEnabled: true,
+                buildingsEnabled: true,
+                compassEnabled: true,
+                indoorViewEnabled: true,
+                mapToolbarEnabled: true,
+                rotateGesturesEnabled: true,
+                scrollGesturesEnabled: true,
+                tiltGesturesEnabled: true,
+                trafficEnabled: true,
+                zoomControlsEnabled: true,
+                zoomGesturesEnabled: true,
+                myLocationEnabled: true,
+                onCameraIdle: () {
+                  AddressCubit.get(context)
+                      .getLocationAddress(latitude, longitude);
+                },
+                onCameraMove: (object) {
+                  latitude = object.target.latitude;
+                  longitude = object.target.longitude;
+                },
+                onMapCreated: (GoogleMapController controller) {
+                  _controller.complete(controller);
+                  setInitialLocation();
+                },
               ),
               Center(
-                child: Padding(
-                  padding: const EdgeInsets.only(bottom: 150),
-                  child: Image.asset(
-                    'assets/images/pin.png',
-                    height: 40,
-                    fit: BoxFit.cover,
-                  ),
+                child: Image.asset(
+                  'assets/images/pin.png',
+                  height: 40,
+                  fit: BoxFit.cover,
                 ),
               ),
               Positioned(
@@ -134,7 +135,6 @@ class MapScreen extends StatelessWidget {
                                 ),
                               ],
                             ),
-
                             const Divider(),
                             TextField(
                               controller: _controllertext,
@@ -154,7 +154,8 @@ class MapScreen extends StatelessWidget {
                           ],
                         ),
                       ),
-                      AddressCubit.get(context).loadChangAddress
+                      AddressCubit.get(context).loadChangAddress ||
+                              AddressCubit.get(context).loadMoveing
                           ? const SizedBox(
                               height: 46,
                               width: 46,
@@ -233,10 +234,11 @@ class MapScreen extends StatelessWidget {
     );
   }
 
-  void getAddresses(double latitude, double longitude) async{
-    List<Placemark> placemarks = await placemarkFromCoordinates(latitude, longitude);
+  void getAddresses(double latitude, double longitude) async {
+    List<Placemark> placemarks =
+        await placemarkFromCoordinates(latitude, longitude);
 
-    _controllertext.text="${placemarks[0].name},${placemarks[0].country},${placemarks[0].street}";
-
+    _controllertext.text =
+        "${placemarks[0].name},${placemarks[0].country},${placemarks[0].street}";
   }
 }

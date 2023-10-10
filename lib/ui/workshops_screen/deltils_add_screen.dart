@@ -1,25 +1,17 @@
 import 'dart:io';
-
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carsa/bloc/post_cubit/post_cubit.dart';
 import 'package:carsa/helpers/constants.dart';
-import 'package:carsa/models/comment.dart';
 import 'package:carsa/ui/workshops_screen/add_post_screen.dart';
-import 'package:easy_localization/easy_localization.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:url_launcher/url_launcher.dart';
-
 import '../../helpers/functions.dart';
 import '../../helpers/styles.dart';
-import 'package:expandable/expandable.dart';
-import '../../models/post.dart';
 import '../../models/workshop_model.dart';
-import '../../widgets/text_widget.dart';
+
 
 class DetailsAddsScreen extends StatefulWidget {
-  Post post;
+ final Post post;
 
   DetailsAddsScreen(this.post);
 

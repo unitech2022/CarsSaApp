@@ -2,6 +2,7 @@ import 'package:carsa/bloc/auth_cubit/auth_cubit.dart';
 import 'package:carsa/helpers/constants.dart';
 import 'package:carsa/helpers/helper_function.dart';
 import 'package:carsa/helpers/styles.dart';
+import 'package:carsa/ui/forget_password_screen/forget_password_screen.dart';
 import 'package:carsa/ui/navigation/navigation_screen.dart';
 import 'package:carsa/work_shop_medul/screens/home_screen/home_screen.dart';
 import 'package:flutter/material.dart';
@@ -11,12 +12,17 @@ import '../../helpers/functions.dart';
 import '../../widgets/custom_button.dart';
 import '../../widgets/text_widget.dart';
 
-class OtpScreen extends StatelessWidget {
+class OtpScreen extends StatefulWidget {
   final String code, phone;
 
   OtpScreen({Key? key, required this.code, required this.phone})
       : super(key: key);
 
+  @override
+  State<OtpScreen> createState() => _OtpScreenState();
+}
+
+class _OtpScreenState extends State<OtpScreen> {
   String newCode = "";
 
   @override
@@ -28,17 +34,13 @@ class OtpScreen extends StatelessWidget {
           // TODO: implement listener
         },
         builder: (context, state) {
-
-
-          if(state is LoginAuthStateSuccess){
-
-            Future.delayed(Duration.zero,(){
-              if(role =="user"){
-          replacePage(context: context,page: const NavigationScreen());
-              }else {
-                 replacePage(context: context,page:  HomeScreen());
+          if (state is LoginAuthStateSuccess) {
+            Future.delayed(Duration.zero, () {
+              if (role == "user") {
+                replacePage(context: context, page: const NavigationScreen());
+              } else {
+                replacePage(context: context, page: HomeScreenWorkShop());
               }
-             
             });
           }
 
@@ -46,7 +48,7 @@ class OtpScreen extends StatelessWidget {
             backgroundColor: textColor,
             appBar: AppBar(
               elevation: 0,
-backgroundColor: textColor,
+              backgroundColor: textColor,
               automaticallyImplyLeading: true,
               leading: IconButton(
                 onPressed: () {
@@ -57,11 +59,10 @@ backgroundColor: textColor,
                   color: Colors.white,
                 ),
               ),
-              title:  Text(
+              title: Text(
                 "التحقق من رقم الجوال",
-                style: TextStyle(color:  Colors.white, fontFamily: "pnuR"),
+                style: TextStyle(color: Colors.white, fontFamily: "pnuR"),
               ),
-
             ),
             body: SingleChildScrollView(
               child: Center(
@@ -72,10 +73,12 @@ backgroundColor: textColor,
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const SizedBox(
-                        height:85,
+                        height: 85,
                       ),
                       Icon(
-                        Icons.phone_android,size: 60,color: Colors.white,
+                        Icons.phone_android,
+                        size: 60,
+                        color: Colors.white,
                       ),
                       // SizedBox(
                       //     width: double.infinity,
@@ -91,7 +94,7 @@ backgroundColor: textColor,
                       ),
                       TextWidget(
                         width: double.infinity,
-                        text:   "ادخل كود الدخول",
+                        text: "ادخل كود الدخول",
                         fontSize: 16,
                         fontFamliy: "pnuR",
                         color: Colors.white,
@@ -147,7 +150,8 @@ backgroundColor: textColor,
                               activeFillColor: Colors.white,
                             ),
                             cursorColor: Colors.black,
-                            animationDuration: const Duration(milliseconds: 300),
+                            animationDuration:
+                                const Duration(milliseconds: 300),
                             backgroundColor: Colors.transparent,
                             enableActiveFill: true,
                             keyboardType: TextInputType.number,
@@ -180,21 +184,23 @@ backgroundColor: textColor,
                               ),
                             )
                           : Padding(
-                              padding: const EdgeInsets.symmetric(horizontal: 20),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 20),
                               child: CustomButton(
                                 height: 50,
                                 fontFamily: "pnuM",
                                 color: homeColor,
                                 isCustomColor: true,
                                 onPress: () {
-                                  if(newCode == code){
-                                  AuthCubit.get(context).loginUser(userName: phone, code: newCode);
-
-                                  }else{
-                                    HelperFunction.slt.notifyUser(context: context,
-                                    color: Colors.grey,message: "الكود غير صحيح");
+                                  if (newCode == widget.code) {
+                                    AuthCubit.get(context).loginUser(
+                                        userName: widget.phone, code: newCode);
+                                  } else {
+                                    HelperFunction.slt.notifyUser(
+                                        context: context,
+                                        color: Colors.grey,
+                                        message: "الكود غير صحيح");
                                   }
-
                                 },
                                 text: "دخول",
                                 textColor: homeColor,
@@ -206,6 +212,13 @@ backgroundColor: textColor,
                       const SizedBox(
                         height: 10,
                       ),
+
+                      TextButton(
+                          onPressed: () {
+                            pushPage(
+                                context: context, page: ForgetPasswordScreen());
+                          },
+                          child: Text("نسيت كلمة المرور ؟")),
 
                       const SizedBox(
                         height: 200,

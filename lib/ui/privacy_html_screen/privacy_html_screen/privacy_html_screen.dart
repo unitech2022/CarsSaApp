@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:flutter/src/widgets/placeholder.dart';
 import 'package:flutter_html/flutter_html.dart';
-
-import '../../../helpers/constants.dart';
 import '../../../helpers/data.dart';
 import '../../../helpers/functions.dart';
 import '../../../helpers/styles.dart';
@@ -29,7 +26,7 @@ class PrivacyHtmlScreen extends StatelessWidget {
           ),
         ),
         title: Text(
-          "الشروط والأحكام" ,
+         " الشروط والأحكام و سياسة الخصوصية" ,
           style: TextStyle(color: homeColor, fontFamily: "pnuR", fontSize: 16),
         ),
       ),

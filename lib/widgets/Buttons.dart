@@ -14,7 +14,15 @@ class Buttons extends StatelessWidget {
   final int radius;
   final int horizontalMargin;
   Function onPressed;
-  Buttons({this.title,this.isBold = false,this.height=50,this.fSize =15,this.radius=50, required this.onPressed,this.horizontalMargin=0,required this.width,this.bgColor =const Color(0xFF1cacc1),this.textColol=Colors.white,this.shadow=true});
+  Buttons({this.title,this.isBold = false,
+  this.height=50,
+  this.fSize =15,this.radius=50,
+   required this.onPressed,
+  this.horizontalMargin=0,
+  required this.width,
+  this.bgColor =const Color(0xFF1cacc1),
+  this.textColol=Colors.white,
+  this.shadow=true});
   @override
   Widget build(BuildContext context) {
     return  InkWell(

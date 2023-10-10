@@ -51,9 +51,9 @@ class LoadingDialog extends StatelessWidget {
 
 
 class LoadPhoto2 extends StatelessWidget {
-  String photoUrl;
+final  String photoUrl;
   var w;
-  double h;
+ final double h;
   final enabled;
 
 

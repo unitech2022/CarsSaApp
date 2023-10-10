@@ -3,7 +3,6 @@ import 'package:carsa/bloc/app_cubit/app_cubit.dart';
 import 'package:carsa/helpers/functions.dart';
 import 'package:carsa/helpers/styles.dart';
 import 'package:carsa/models/home_model.dart';
-import 'package:carsa/ui/all_products_screen/all_products_screen.dart';
 import 'package:carsa/ui/car_models_screen/car_models_screen.dart';
 import 'package:carsa/ui/shoping_screen/shoping_screen.dart';
 import 'package:flutter/material.dart';
@@ -14,7 +13,6 @@ import '../../widgets/custom_text.dart';
 import 'componts/app_bar_home.dart';
 import 'componts/carsoul_widget.dart';
 import 'componts/item_category.dart';
-import 'componts/list_bestest.dart';
 import 'componts/title_list.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -45,6 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
         backgroundColor: homeColor,
         automaticallyImplyLeading: false,
         centerTitle: true,
+      
         title: const Text(
           "الرئيسية",
           style: TextStyle(color: Colors.white, fontFamily: "pnuR"),
@@ -313,7 +312,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                       return InkWell(
                                           onTap: () {
                                             pushPage(
-                                                page: ShoppingScreen(cato, 0,0),
+                                                page:
+                                                    ShoppingScreen(cato, 0, 0),
                                                 context: context);
                                           },
                                           child: ItemCategory(
@@ -363,7 +363,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               SizedBox(
                                 width: double.infinity,
                                 child: Padding(
-                                  padding: const EdgeInsets.only(bottom: 20.0 ,left: 20,right: 20),
+                                  padding: const EdgeInsets.only(
+                                      bottom: 20.0, left: 20, right: 20),
                                   child: GridView.builder(
                                     shrinkWrap: true,
                                     gridDelegate:
@@ -371,7 +372,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             crossAxisCount: 2,
                                             mainAxisSpacing: 2,
                                             crossAxisSpacing: 2,
-                                            childAspectRatio:1),
+                                            childAspectRatio: 1),
                                     physics: NeverScrollableScrollPhysics(),
                                     itemCount: AppCubit.get(context)
                                         .homeModel
@@ -394,7 +395,10 @@ class _HomeScreenState extends State<HomeScreen> {
                                       return InkWell(
                                         onTap: () {
                                           pushPage(
-                                              page: CarModelsScreen(carId: cate.id!, nameCar: cate.name!,),
+                                              page: CarModelsScreen(
+                                                carId: cate.id!,
+                                                nameCar: cate.name!,
+                                              ),
                                               context: context);
                                         },
                                         child: Card(
@@ -412,7 +416,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                               // width: 80,
                                               child: Column(
                                                 mainAxisSize: MainAxisSize.min,
-                                                mainAxisAlignment: MainAxisAlignment.center,
+                                                mainAxisAlignment:
+                                                    MainAxisAlignment.center,
                                                 children: [
                                                   CachedNetworkImage(
                                                     imageUrl: baseurlImage +
@@ -423,8 +428,9 @@ class _HomeScreenState extends State<HomeScreen> {
                                                     height: 60,
                                                     width: double.infinity,
                                                     fit: BoxFit.contain,
-                                                    placeholder: (context, url) =>
-                                                        const Center(
+                                                    placeholder:
+                                                        (context, url) =>
+                                                            const Center(
                                                       child:
                                                           CircularProgressIndicator(
                                                         color: homeColor,
@@ -439,12 +445,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   ),
                                                   CustomText(
                                                       family: "pnuB",
-
                                                       size: 18,
-                                                      text: AppCubit.get(context)
-                                                          .homeModel
-                                                          .brands![index]
-                                                          .name!,
+                                                      text:
+                                                          AppCubit.get(context)
+                                                              .homeModel
+                                                              .brands![index]
+                                                              .name!,
                                                       textColor: Colors.black54,
                                                       weight: FontWeight.bold,
                                                       align: TextAlign.center),

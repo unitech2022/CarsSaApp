@@ -1,12 +1,10 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carsa/bloc/post_cubit/post_cubit.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
 import '../../../../helpers/constants.dart';
 import '../../../../helpers/functions.dart';
 import '../../../../helpers/styles.dart';
@@ -178,7 +176,7 @@ class _OfferDetailsScreenState extends State<OfferDetailsScreen> {
                                 GestureDetector(
                                   onTap: () {
                                     luncherUrl(Uri.parse(
-                                        'whatsapp://send?phone=20${PostCubit.get(context).offerResponse!.workshop!.phoneWhats}'));
+                                        'whatsapp://send?phone=+${PostCubit.get(context).offerResponse!.workshop!.phoneWhats}'));
                                   },
                                   child: Container(
                                     height: 50,

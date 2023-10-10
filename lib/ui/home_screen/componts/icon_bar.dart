@@ -1,11 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-class IconButtonController extends StatelessWidget {
+class IconButtonController extends StatefulWidget {
   final void Function() onPress;
   final IconData icon;
   final Color color;
-  double size;
+ final double size;
 
   IconButtonController(
       {required this.onPress,
@@ -14,16 +14,21 @@ class IconButtonController extends StatelessWidget {
       this.size = 33});
 
   @override
+  State<IconButtonController> createState() => _IconButtonControllerState();
+}
+
+class _IconButtonControllerState extends State<IconButtonController> {
+  @override
   Widget build(BuildContext context) {
     return Expanded(
       child: Center(
         child: IconButton(
             padding: EdgeInsets.zero,
-            onPressed: onPress,
+            onPressed: widget.onPress,
             icon: Icon(
-              icon,
-              color: color,
-              size: size,
+              widget.icon,
+              color: widget.color,
+              size: widget.size,
             )),
       ),
     );
@@ -34,7 +39,7 @@ class IconButtonController2 extends StatelessWidget {
   final void Function() onPress;
   final IconData icon;
   final Color color;
-  double size;
+ final double size;
 
   IconButtonController2(
       {required this.onPress,

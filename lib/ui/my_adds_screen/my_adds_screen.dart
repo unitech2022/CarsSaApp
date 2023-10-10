@@ -1,19 +1,19 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carsa/helpers/constants.dart';
-import 'package:carsa/ui/my_adds_screen/update_my_add_screen.dart';
+
 import 'package:carsa/ui/workshops_screen/offers_screen/offers_screen.dart';
 import 'package:carsa/ui/workshops_screen/update_add/update_my_add.dart';
-import 'package:easy_localization/easy_localization.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../bloc/post_cubit/post_cubit.dart';
 import '../../helpers/functions.dart';
 import '../../helpers/styles.dart';
-import '../../models/post.dart';
+
 import '../../models/workshop_model.dart';
 import '../../widgets/Texts.dart';
 import '../../widgets/text_widget.dart';
-import '../workshops_screen/deltils_add_screen.dart';
+
 
 class MyAddsScreen extends StatefulWidget {
   const MyAddsScreen({Key? key}) : super(key: key);
@@ -53,7 +53,7 @@ class _MyAddsScreenState extends State<MyAddsScreen> {
                 ),
               ),
               title: const Text(
-                "خدمات الورش",
+                 "عروض الورش للعملاء",
                 style: TextStyle(
                     color: homeColor,
                     fontFamily: "pnuB",
@@ -84,10 +84,10 @@ class _MyAddsScreenState extends State<MyAddsScreen> {
                     itemCount: PostCubit.get(context).myPosts.length,
                     itemBuilder: (ctx, index) {
                       Post post = PostCubit.get(context).myPosts[index];
-                      DateTime now =
-                          DateTime.parse(post.createdAt.toString());
-                      String formattedDate =
-                          DateFormat('yyyy-MM-dd – kk:mm').format(now);
+                      // DateTime now =
+                      //     DateTime.parse(post.createdAt.toString());
+                      // String formattedDate =
+                      //     DateFormat('yyyy-MM-dd – kk:mm').format(now);
                       return InkWell(
                           onTap: () {
                             pushPage(

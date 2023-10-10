@@ -3,13 +3,10 @@ import 'package:carsa/bloc/product_bloc/product_cubit.dart';
 import 'package:carsa/helpers/constants.dart';
 import 'package:carsa/helpers/functions.dart';
 import 'package:carsa/helpers/styles.dart';
-import 'package:carsa/models/car_mode.dart';
 import 'package:carsa/models/home_model.dart';
 import 'package:carsa/widgets/Texts.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../bloc/app_cubit/app_cubit.dart';
 import '../../widgets/custom_button.dart';
 import '../../widgets/text_widget.dart';

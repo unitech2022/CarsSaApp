@@ -3,13 +3,11 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carsa/ui/shoping_screen/shoping_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import '../../../helpers/constants.dart';
 import '../../../helpers/functions.dart';
 import '../../../helpers/styles.dart';
 import '../../../models/home_model.dart';
 import '../../../widgets/text_widget.dart';
-import '../../search_screen/search_screen.dart';
 
 class ListNeedsOfCars extends StatelessWidget {
 final List<NeedModel> list;

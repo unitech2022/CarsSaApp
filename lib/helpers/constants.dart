@@ -1,7 +1,7 @@
 import 'package:carsa/models/user_model.dart';
 
-  // const baseUrl = "https://4074-197-38-0-252.eu.ngrok.io";
-  const baseUrl = "https://carsa.urapp.site";
+//  const baseUrl = "https://c58f-197-38-33-44.ngrok-free.app";
+ const baseUrl = "https://carsa.urapp.site";
 
 const baseurlImage = baseUrl + "/images/";
 
@@ -21,6 +21,7 @@ const registerPoint = "/auth/signup";
 const getUserDetailsPoint = "/user/detail";
 const updateUserDetailsPoint = "/user/update";
 const checkUserNamePoint = "/auth/check-username";
+const getCodePoint = "/auth/get-Code";
 const addFavPoint = "/fav/add-favorite";
 const getFavPoint = "/fav/get-Favorites";
 const deleteFavPoint = "/fav/delete-Favorite";

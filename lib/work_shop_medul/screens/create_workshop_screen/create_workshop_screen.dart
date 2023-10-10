@@ -1,15 +1,11 @@
-import 'dart:ffi';
 import 'dart:io';
-
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carsa/models/address.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter/src/widgets/container.dart';
 import 'package:flutter/src/widgets/framework.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-
 import '../../../bloc/workshops_cubit/workshop_cubit.dart';
 import '../../../bloc/workshops_cubit/workshop_state.dart';
 import '../../../helpers/constants.dart';
@@ -17,7 +13,6 @@ import '../../../helpers/functions.dart';
 import '../../../helpers/helper_function.dart';
 import '../../../helpers/styles.dart';
 import '../../../models/workshop_model.dart';
-import '../../../ui/my-address_screen/map_screen.dart';
 import '../../../widgets/Texts.dart';
 import '../../../widgets/custom_button.dart';
 import '../../../widgets/custom_drop_down2.dart';

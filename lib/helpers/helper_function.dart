@@ -1,6 +1,3 @@
-
-
-
 import 'dart:io';
 
 import 'package:another_flushbar/flushbar.dart';
@@ -10,16 +7,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-
-
-
 import 'functions.dart';
 
-class HelperFunction{
-
-
+class HelperFunction {
   static HelperFunction slt = HelperFunction();
-
 
   formateData(String date) {
     DateTime now = DateTime.parse(date);
@@ -28,7 +19,7 @@ class HelperFunction{
   }
 
   notifyUser({context, message, color, bool isNeedPop = false}) {
-    return  Flushbar(
+    return Flushbar(
       padding: const EdgeInsets.all(30),
       flushbarStyle: FlushbarStyle.GROUNDED,
       flushbarPosition: FlushbarPosition.TOP,
@@ -38,8 +29,8 @@ class HelperFunction{
       animationDuration: const Duration(milliseconds: 400),
       leftBarIndicatorColor: color,
     )..show(context).whenComplete(() {
-      if (isNeedPop) pop(context);
-    });
+        if (isNeedPop) pop(context);
+      });
   }
 
   Future<bool> hasNetwork() async {
@@ -53,10 +44,11 @@ class HelperFunction{
       return false;
     }
   }
+
   checkInternet(context) async {
     bool isOnline = await hasNetwork();
     if (!isOnline) {
-     notifyUser(
+      notifyUser(
         context: context,
         message: "no_internet",
         color: Colors.red,
@@ -65,10 +57,8 @@ class HelperFunction{
     return isOnline;
   }
 
-
-  showSheet(BuildContext context,child) {
+  showSheet(BuildContext context, child) {
     showModalBottomSheet(
-      
       context: context,
       clipBehavior: Clip.antiAlias,
       backgroundColor: Colors.transparent,
@@ -79,14 +69,13 @@ class HelperFunction{
     );
   }
 
-
   openGoogleMapLocation(lat, lng) async {
     String mapOptions = [
       'saddr=${locData.latitude},${locData.longitude}',
       'daddr=$lat,$lng',
       'dir_action=navigate'
     ].join('&');
-  
+
     final url = 'https://www.google.com/maps?$mapOptions';
     if (await canLaunch(url)) {
       await launch(url);
@@ -95,34 +84,74 @@ class HelperFunction{
     }
   }
 
-openUrlFaceBook({ fbPageId,  pageUrl}) async {
+openNewGoogleMapLocation({lat, lng}) async {
+  // try{
+  // String mapOptions = [
+  //   'saddr=${locData.latitude},${locData.longitude}',
+  //   'daddr=$lat,$lng',
+  //   'dir_action=navigate'
+  // ].join('&');
 
-  String fbProtocolUrl;
+  //   String url = 'https://www.google.com/maps?$mapOptions';
+  // // if (await canLaunchUrl(Uri.parse(url),)) {
+  //   await launchUrl(Uri.parse(url),mode: LaunchMode.externalApplication);
+  // // } else {
+  // //   throw 'Could not launch $url';
+  // // }
+  // }catch(e){
+  //    throw 'Could not launch ${e}';
+  // }
+
+  String appleUrl =
+      'https://maps.apple.com/?saddr=${locData.latitude},${locData.longitude}&daddr=$lat,$lng&directionsmode=driving';
+  String googleUrl =
+      'https://www.google.com/maps/search/?api=1&query=$lat,$lng';
+
+  Uri appleUri = Uri.parse(appleUrl);
+  Uri googleUri = Uri.parse(googleUrl);
+
   if (Platform.isIOS) {
-    fbProtocolUrl = 'fb://profile/$fbPageId';
-  } else {
-    fbProtocolUrl = 'fb://page/$fbPageId';
-  }
-
-  String fallbackUrl = '$pageUrl';
-
-  try {
-    bool launched = await launch(fbProtocolUrl, forceSafariVC: false);
-
-    if (!launched) {
-      await launch(fallbackUrl, forceSafariVC: false);
+    if (await canLaunchUrl(appleUri)) {
+      await launchUrl(appleUri, mode: LaunchMode.externalApplication);
+    } else {
+      if (await canLaunchUrl(googleUri)) {
+        await launchUrl(googleUri, mode: LaunchMode.externalApplication);
+      }
     }
-  } catch (e) {
-    await launch(fallbackUrl, forceSafariVC: false);
+  } else {
+    if (await canLaunchUrl(googleUri)) {
+      await launchUrl(googleUri, mode: LaunchMode.externalApplication);
+    }
   }
 }
 
+
+  openUrlFaceBook({fbPageId, pageUrl}) async {
+    String fbProtocolUrl;
+    if (Platform.isIOS) {
+      fbProtocolUrl = 'fb://profile/$fbPageId';
+    } else {
+      fbProtocolUrl = 'fb://page/$fbPageId';
+    }
+
+    String fallbackUrl = '$pageUrl';
+
+    try {
+      bool launched = await launch(fbProtocolUrl, forceSafariVC: false);
+
+      if (!launched) {
+        await launch(fallbackUrl, forceSafariVC: false);
+      }
+    } catch (e) {
+      await launch(fallbackUrl, forceSafariVC: false);
+    }
+  }
 
   void launchSocial(String url, String fallbackUrl) async {
     // Don't use canLaunch because of fbProtocolUrl (fb://)
     try {
       bool launched =
-      await launch("$url", forceSafariVC: false, forceWebView: false);
+          await launch("$url", forceSafariVC: false, forceWebView: false);
       if (!launched) {
         await launch(fallbackUrl, forceSafariVC: false, forceWebView: false);
       }
@@ -131,15 +160,46 @@ openUrlFaceBook({ fbPageId,  pageUrl}) async {
     }
   }
 
+  launchWhatsapp({number, context}) async {
+    var whatsapp = number;
+    var whatsappAndroid =
+        Uri.parse("whatsapp://send?phone=$whatsapp&text=hello");
+    if (await canLaunchUrl(whatsappAndroid)) {
+      await launchUrl(whatsappAndroid);
+    } else {
+      ScaffoldMessenger.of(context).showSnackBar(
+        const SnackBar(
+          content: Text("WhatsApp is not installed on the device"),
+        ),
+      );
+    }
+  }
 
-  rateApp({appPackageName}){
+  openDialPad(String phoneNumber) async {
+    Uri url = Uri(scheme: "tel", path: phoneNumber);
+    if (await canLaunchUrl(url)) {
+      await launchUrl(url);
+    } else {
+       print("Can't open dial pad.");
+    }
+}
+
+  rateApp({appPackageName}) {
     try {
       launch("market://details?id=" + appPackageName);
-    } on PlatformException catch(e) {
+    } on PlatformException {
       launch("https://play.google.com/store/apps/details?id=" + appPackageName);
     } finally {
       launch("https://play.google.com/store/apps/details?id=" + appPackageName);
     }
   }
+}
 
+
+class MyHttpOverrides extends HttpOverrides{
+  @override
+  HttpClient createHttpClient(SecurityContext? context){
+    return super.createHttpClient(context)
+      ..badCertificateCallback = (X509Certificate cert, String host, int port)=> true;
+  }
 }

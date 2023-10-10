@@ -295,7 +295,8 @@ class _MyProfileScreenState extends State<MyProfileScreen> {
     );
   }
 
-  _selectApp(context) => Container(
+  _selectApp(context) =>
+   Container(
         height: 200,
         decoration: const BoxDecoration(
           color: Colors.white,

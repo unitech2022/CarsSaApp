@@ -4,17 +4,16 @@ import 'package:carsa/helpers/constants.dart';
 import 'package:carsa/models/comment.dart';
 import 'package:carsa/models/offer_response.dart';
 import 'package:carsa/ui/my_adds_screen/my_adds_screen.dart';
+import 'package:carsa/work_shop_medul/screens/home_screen/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
 import 'package:http/http.dart' as http;
-
 import '../../helpers/functions.dart';
 import '../../helpers/helper_function.dart';
-
 import '../../models/post.dart';
 import '../../models/workshop_model.dart';
-import '../../ui/home_screen/home_screen.dart';
+
 
 part 'post_state.dart';
 
@@ -142,8 +141,8 @@ class PostCubit extends Cubit<PostState> {
     http.StreamedResponse response = await request.send();
 
     if (response.statusCode == 200) {
-      String jsonsDataString = await response.stream.bytesToString();
-      final jsonData = jsonsDataString;
+      // String jsonsDataString = await response.stream.bytesToString();
+      // final jsonData = jsonsDataString;
 
       // get Carts
       loadDelete = false;
@@ -374,7 +373,7 @@ class PostCubit extends Cubit<PostState> {
       printFunction(jsonData);
       addOfferLoad = false;
 
-      pushPage(context: contetxt, page: const HomeScreen());
+      pushPage(context: contetxt, page:  HomeScreenWorkShop());
       HelperFunction.slt.notifyUser(
           context: contetxt,
           message: "تم اضافة العرض بنجاح ",

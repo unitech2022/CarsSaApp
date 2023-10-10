@@ -61,7 +61,7 @@ readToken() async {
 }
 
 isRegistered() {
-  return (token != "" && token != null);
+  return (token != "");
 }
 
 saveToken() {

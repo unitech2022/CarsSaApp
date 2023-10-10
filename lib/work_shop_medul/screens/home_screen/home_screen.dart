@@ -22,12 +22,12 @@ import '../create_workshop_screen/create_workshop_screen.dart';
 import '../post_detalis_screen/post_details_screen.dart';
 import '../sitings_screen/seitings_screen.dart';
 
-class HomeScreen extends StatefulWidget {
+class HomeScreenWorkShop extends StatefulWidget {
   @override
-  State<HomeScreen> createState() => _HomeScreenState();
+  State<HomeScreenWorkShop> createState() => _HomeScreenWorkShopState();
 }
 
-class _HomeScreenState extends State<HomeScreen>
+class _HomeScreenWorkShopState extends State<HomeScreenWorkShop>
     with SingleTickerProviderStateMixin {
   TabController? _tabController;
   @override
@@ -143,9 +143,9 @@ class _HomeScreenState extends State<HomeScreen>
                       ,
                       GestureDetector(
                         onTap: () {
-                          HelperFunction().openGoogleMapLocation(
-                              state.responseModel.workshop!.lat,
-                              state.responseModel.workshop!.lng);
+                          HelperFunction().openNewGoogleMapLocation(
+                             lat: state.responseModel.workshop!.lat,
+                            lng:  state.responseModel.workshop!.lng);
                         },
                         child: Row(
                           children: [
@@ -193,7 +193,7 @@ class _HomeScreenState extends State<HomeScreen>
                         fontWeight: FontWeight.bold),
                     tabs: const [
                       Tab(
-                        text: 'الطلبات الحالية',
+                        text: 'العروض الحالية',
                       ),
                       Tab(
                         text: 'عروضى',
@@ -306,7 +306,7 @@ class ListPosts extends StatelessWidget {
     return ListView.separated(
       padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 10),
       itemCount: posts.length,
-      physics: const NeverScrollableScrollPhysics(),
+      // physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemBuilder: (ctx, index) {
         Post post = posts[index];
@@ -426,7 +426,7 @@ class ListOffers extends StatelessWidget {
   Widget build(BuildContext context) {
     return ListView.separated(
       padding: EdgeInsets.only(bottom: 30),
-      physics: const NeverScrollableScrollPhysics(),
+      // physics: const NeverScrollableScrollPhysics(),
       shrinkWrap: true,
       itemCount: offers.length,
       itemBuilder: (_, i) {
@@ -437,12 +437,12 @@ class ListOffers extends StatelessWidget {
         return GestureDetector(
           onTap: () {
             if (offer.accepted == 1) {
-              // pushPage(
-              //     context: context,
-              //     page: PostDetailsScreen(
-              //       postId: offer.postId!,
-              //       workShopId: workshopId,
-              //     ));
+              pushPage(
+                  context: context,
+                  page: PostDetailsScreen(
+                    postId: offer.postId!,
+                    workShopId: workshopId,
+                  ));
             }
           },
           child: Container(

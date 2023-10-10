@@ -1,28 +1,24 @@
 import 'package:carsa/bloc/auth_cubit/auth_cubit.dart';
-import 'package:carsa/helpers/constants.dart';
 import 'package:carsa/helpers/functions.dart';
 import 'package:carsa/helpers/helper_function.dart';
 import 'package:carsa/helpers/styles.dart';
-import 'package:carsa/ui/navigation/navigation_screen.dart';
-
-import 'package:carsa/ui/privacy_html_screen/privacy_html_screen/privacy_html_screen.dart';
-import 'package:carsa/ui/sign_up_screen/sign_up_screen.dart';
+import 'package:carsa/ui/login_screen/login_screen.dart';
+import 'package:carsa/ui/otp_screen/otp_screen.dart';
 import 'package:carsa/widgets/custom_button.dart';
-import 'package:carsa/widgets/custom_text.dart';
 import 'package:carsa/widgets/custom_text_field.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../widgets/custom_text.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({Key? key}) : super(key: key);
+class ForgetPasswordScreen extends StatefulWidget {
+  const ForgetPasswordScreen({Key? key}) : super(key: key);
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<ForgetPasswordScreen> createState() => _ForgetPasswordScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _ForgetPasswordScreenState extends State<ForgetPasswordScreen> {
   final _phoneController = TextEditingController();
   String code = "+966";
   @override
@@ -38,21 +34,13 @@ class _LoginScreenState extends State<LoginScreen> {
     _phoneController.dispose();
   }
 
-  // String get password => _passwordController.text.trim();
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<AuthCubit, AuthState>(
-      listener: (context, state) {},
-      builder: (context, state) {
-        // if (state is CheckUserAuthStateSuccess) {
-        //   printFunction("${state.status}");
-
-       
-        // }
-
-        return Scaffold(
-          backgroundColor: Colors.black26,
-          body: SingleChildScrollView(
+    return Scaffold(
+      backgroundColor: Colors.black26,
+      body: BlocBuilder<AuthCubit, AuthState>(
+        builder: (context, state) {
+          return SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 40),
               child: Column(
@@ -60,21 +48,11 @@ class _LoginScreenState extends State<LoginScreen> {
                   const SizedBox(
                     height: 100,
                   ),
-                  const CustomText(
-                      family: "pnuB",
-                      size: 25,
-                      text: "أهلا بعودتك !",
-                      textColor: Colors.white,
-                      weight: FontWeight.bold,
-                      align: TextAlign.center),
-                  const SizedBox(
-                    height: 10,
-                  ),
 
                   const CustomText(
                       family: "pnuR",
                       size: 18,
-                      text: "تسجيل الدخول ",
+                      text: "استرجاع كلمة المرور",
                       textColor: Colors.grey,
                       weight: FontWeight.w300,
                       align: TextAlign.center),
@@ -137,7 +115,7 @@ class _LoginScreenState extends State<LoginScreen> {
                                     ),
                                     ContainerCountryCode(
                                       onPress: () {
-                                          pop(context);
+                                        pop(context);
                                         code = "+968";
                                         setState(() {});
                                       },
@@ -177,51 +155,21 @@ class _LoginScreenState extends State<LoginScreen> {
                   SizedBox(
                     height: 10,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.center,
-                    children: [
-                      Theme(
-                        data: Theme.of(context).copyWith(
-                          unselectedWidgetColor: Colors.white,
-                        ),
-                        child: Checkbox(
-                          tristate: false,
-                          shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(5),
-                              side: const BorderSide(
-                                  color: Colors.white, width: 2)),
-                          checkColor: Colors.white,
-                          activeColor: homeColor,
-                          value: AuthCubit.get(context).isChecked,
-                          onChanged: (value) {
-                            AuthCubit.get(context).changeCheckBox(value!);
-                          },
-                        ),
-                      ),
-                      TextButton(
-                        onPressed: () {
-                          pushPage(
-                              context: context,
-                              page: PrivacyHtmlScreen(
-                               
-                              ));
-                        },
-                        child: const Text(
-                          "أوافق علي الشروط والأحكام",
-                          style: TextStyle(
-                              color: Colors.white, fontFamily: "pnuL"),
-                        ),
-                      ),
-                    ],
-                  ),
+
                   const SizedBox(
                     height: 10,
                   ),
+                   CustomText(
+                      family: "pnuR",
+                      size: 18,
+                      text: state is GetCodeSuccess ? " كود الدخول هو :  ${state.code}":"",
+                      textColor: Colors.grey,
+                      weight: FontWeight.w300,
+                      align: TextAlign.center),
                   const SizedBox(
                     height: 25,
                   ),
-                  state is CheckUserAuthStateLoad
+                  state is GetCodeLoading
                       ? const SizedBox(
                           height: 60,
                           width: 60,
@@ -232,12 +180,22 @@ class _LoginScreenState extends State<LoginScreen> {
                           ),
                         )
                       : CustomButton3(
-                          text: "تسجيل الدخول",
+                          text: state is GetCodeSuccess
+                              ? "دخول الان"
+                              : "استرجاع كود الدخول",
                           fontFamily: "PNUB",
                           onPress: () {
-                            if (isValidate()) {
-                              AuthCubit.get(context).checkUserName(
-                                  phone: code + _phoneController.text, code: code,context: context);
+                            if (state is GetCodeSuccess) {
+                              pushPage(
+                                  context: context,
+                                  page: OtpScreen(
+                                      code: state.code, phone: state.phone));
+                            } else {
+                              if (isValidate()) {
+                                AuthCubit.get(context).getCode(
+                                    phone: code + _phoneController.text,
+                                    context: context);
+                              }
                             }
                           },
                           redius: 10,
@@ -246,116 +204,27 @@ class _LoginScreenState extends State<LoginScreen> {
                           fontSize: 18,
                           height: 60),
                   const SizedBox(
-                    height: 25,
-                  ),
-                  InkWell(
-                    onTap: () {
-                      pushPage(page: SignUpScreen(phone: "",code: "+966",), context: context);
-                    },
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: const SizedBox(
-                        width: double.infinity,
-                        child: CustomText(
-                            family: "pnuB",
-                            size: 15,
-                            text: "انشاء حساب جديد",
-                            textColor: Colors.white,
-                            weight: FontWeight.w300,
-                            align: TextAlign.center),
-                      ),
-                    ),
-                  ),
-                  const SizedBox(
                     height: 150,
-                  ),
-
-                role=="user"?  InkWell(
-                    onTap: () {
-                      pushPage(page: NavigationScreen(), context: context);
-                    },
-                    child: const CustomText(
-                        family: "pnuB",
-                        size: 15,
-                        text: "تخطى والاستمرار كضيف",
-                        textColor: Colors.green,
-                        weight: FontWeight.w300,
-                        align: TextAlign.center),
-                  ):SizedBox(),
-                  const SizedBox(
-                    height: 35,
                   ),
                 ],
               ),
             ),
-          ),
-        );
-      },
+          );
+        },
+      ),
     );
   }
 
   bool isValidate() {
-    if (_phoneController.text.isEmpty &&
-        _phoneController.text.trim().length == 9) {
+    if (_phoneController.text.isEmpty ||
+        _phoneController.text.trim().length < 9 
+        // _phoneController.text.trim().startsWith("5")
+        ) {
       HelperFunction.slt.notifyUser(
           context: context, color: Colors.red, message: "أدخل رقم الهاتف");
-      return false;
-    } else if (!AuthCubit.get(context).isChecked) {
-      HelperFunction.slt.notifyUser(
-          context: context,
-          color: Colors.red,
-          message: "يجب الموافقة علي الشروط والأحكام");
       return false;
     } else {
       return true;
     }
-  }
-}
-
-class ContainerCountryCode extends StatelessWidget {
-  final void Function() onPress;
-  final String code, nameContry;
-  ContainerCountryCode({
-    required this.onPress,
-    required this.nameContry,
-    required this.code,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: onPress,
-      child: Container(
-        height: 50,
-        decoration: BoxDecoration(
-            border: Border(bottom: BorderSide(width: 1, color: Colors.grey))),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: [
-            Text(
-              code,
-              textDirection: TextDirection.ltr,
-              style: TextStyle(
-                  fontFamily: "pnuB",
-                  fontSize: 15,
-                  color: Colors.black,
-                  height: 1.2),
-              textAlign: TextAlign.center,
-            ),
-            SizedBox(width: 20,),
-            Text(
-              nameContry,
-              textDirection: TextDirection.ltr,
-              style: TextStyle(
-                  fontFamily: "pnuB",
-                  fontSize: 15,
-                  color: Colors.black,
-                  height: 1.2),
-              textAlign: TextAlign.center,
-            ),
-          ],
-        ),
-      ),
-    );
   }
 }

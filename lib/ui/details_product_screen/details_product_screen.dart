@@ -15,7 +15,6 @@ import '../../helpers/functions.dart';
 import '../../models/home_model.dart';
 import '../../widgets/custom_button.dart';
 import '../../widgets/custom_text.dart';
-import '../home_screen/componts/rating_best.dart';
 import '../navigation/navigation_screen.dart';
 
 class DetailsProductScreen extends StatefulWidget {

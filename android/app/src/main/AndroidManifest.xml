@@ -2,8 +2,8 @@
     package="com.carsa.carsa">
     <uses-permission android:name="android.permission.INTERNET" />
    <application
-        android:label="carsa"
-        android:icon="@mipmap/launcher_icon">
+        android:label="Car SA"
+        android:icon="@mipmap/ic_launcher">
 
 
        <provider
@@ -53,7 +53,10 @@
             android:value="2" />
 
        <meta-data android:name="com.google.android.geo.API_KEY"
-           android:value="AIzaSyCHcAKXFZuQ8WhkAvW1zv3MTVibHU9EuF0"/>
+           android:value="AIzaSyBqsYXp5rpIl7ecuU4Dzf9va1tyWsu7lF4"/>
+
+           <!-- <meta-data android:name="com.google.android.geo.API_KEY"
+           android:value="AIzaSyCHcAKXFZuQ8WhkAvW1zv3MTVibHU9EuF0"/> -->
 
        <meta-data
            android:name="com.google.android.gms.version"

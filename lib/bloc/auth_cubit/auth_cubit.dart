@@ -1,8 +1,10 @@
 import 'dart:convert';
 
 import 'package:carsa/helpers/functions.dart';
+import 'package:carsa/helpers/helper_function.dart';
 
 import 'package:carsa/models/user_model.dart';
+import 'package:flutter/material.dart';
 
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:meta/meta.dart';
@@ -14,14 +16,13 @@ import '../../ui/sign_up_screen/sign_up_screen.dart';
 
 part 'auth_state.dart';
 
-
-// todo : validate email error 
+// todo : validate email error
 class AuthCubit extends Cubit<AuthState> {
   AuthCubit() : super(AuthInitial());
 
   static AuthCubit get(context) => BlocProvider.of<AuthCubit>(context);
 
-  checkUserName({phone,context ,code}) async {
+  checkUserName({phone, context, code}) async {
     emit(CheckUserAuthStateLoad());
 
     var request =
@@ -34,24 +35,21 @@ class AuthCubit extends Cubit<AuthState> {
       String jsonsDataString = await response.stream.bytesToString();
       final jsonData = jsonDecode(jsonsDataString);
       printFunction(jsonData);
-    int status=  jsonData["status"];
+      int status = jsonData["status"];
       if (status == 0) {
-        
-          pushPage(
-              page: SignUpScreen(
-                phone:phone.split(code)[1],
-                code: code,
-              ),
-              context: context);
-      
-        //
+        pushPage(
+            page: SignUpScreen(
+              phone: phone.split(code)[1],
+              code: code,
+            ),
+            context: context);
 
+        //
       } else {
-       
-          pushPage(
-              page: OtpScreen(phone:phone, code: jsonData["code"]),
-              context: context);
-       
+        pushPage(
+            page: OtpScreen(phone: phone, code: jsonData["code"]),
+            context: context);
+
         //
       }
 
@@ -63,6 +61,32 @@ class AuthCubit extends Cubit<AuthState> {
     }
   }
 
+  Future getCode({phone, context}) async {
+    emit(GetCodeLoading());
+
+    var request =
+        http.MultipartRequest('POST', Uri.parse(baseUrl + getCodePoint));
+    request.fields.addAll({'phone': phone});
+
+    http.StreamedResponse response = await request.send();
+
+    if (response.statusCode == 200) {
+      String jsonsDataString = await response.stream.bytesToString();
+      final jsonData = jsonDecode(jsonsDataString);
+      printFunction(jsonData);
+
+      emit(GetCodeSuccess(phone: phone, code: jsonData["code"]));
+    } else if (response.statusCode == 401) {
+      HelperFunction.slt.notifyUser(
+          context: context, color: Colors.red, message: "الرقم غير مسجل");
+      emit(GetCodeError());
+    } else {
+      HelperFunction.slt
+          .notifyUser(context: context, color: Colors.red, message: "هناك خطأ في الخادم");
+      emit(GetCodeError());
+    }
+  }
+
   bool isValidate = false;
 
   validateUser({username, code, fullName}) async {
@@ -70,7 +94,8 @@ class AuthCubit extends Cubit<AuthState> {
 
     var request =
         http.MultipartRequest('POST', Uri.parse(baseUrl + validatePoint));
-    request.fields.addAll({'email': "email"+code.toString(), 'userName': username});
+    request.fields
+        .addAll({'email': "email" + code.toString(), 'userName': username});
 
     http.StreamedResponse response = await request.send();
 
@@ -98,8 +123,8 @@ class AuthCubit extends Cubit<AuthState> {
         http.MultipartRequest('POST', Uri.parse(baseUrl + registerPoint));
     request.fields.addAll({
       'fullName': fullName,
-      'email': "email"+code.toString(),
-      "code" :code.toString(),
+      'email': "email" + code.toString(),
+      "code": code.toString(),
       'userName': userName,
       'knownName': 'askdkalshkjsa',
       'Role': "user",
@@ -160,11 +185,10 @@ class AuthCubit extends Cubit<AuthState> {
     emit(ChangeCheckBox());
   }
 
-
- List<SittingModel> sittings = [];
+  List<SittingModel> sittings = [];
 
   bool loadSittings = false;
-getSitting() async {
+  getSitting() async {
     loadSittings = true;
     sittings = [];
     emit(GetDataLoadLoad());

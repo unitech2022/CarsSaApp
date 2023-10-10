@@ -1,5 +1,6 @@
 
-import 'package:awesome_notifications/awesome_notifications.dart';
+import 'dart:io';
+
 import 'package:carsa/bloc/address_cubit/address_cubit.dart';
 import 'package:carsa/bloc/cart_cubite/cart_cubit.dart';
 import 'package:carsa/bloc/order_cubit/order_cubit.dart';
@@ -9,23 +10,17 @@ import 'package:carsa/bloc/suggestion_cubit/suggestion_cubit.dart';
 import 'package:carsa/bloc/workshops_cubit/workshop_cubit.dart';
 import 'package:carsa/helpers/styles.dart';
 import 'package:carsa/ui/add_car_screen/add_car_screen.dart';
-import 'package:carsa/ui/category_screen/category_screen.dart';
-
 import 'package:carsa/ui/edite_my_profile_screen/edite_my_profile_screen.dart';
 import 'package:carsa/ui/home_screen/home_screen.dart';
 import 'package:carsa/ui/login_screen/login_screen.dart';
-
 import 'package:carsa/ui/my-address_screen/my-address_screen.dart';
 import 'package:carsa/ui/my-orders-screen/my-orders-screen.dart';
 import 'package:carsa/ui/my_cars_screen/my_cars_screen.dart';
 import 'package:carsa/ui/my_favorite_screen/my_favorite_screen.dart';
 import 'package:carsa/ui/navigation/navigation_screen.dart';
 import 'package:carsa/ui/ordering_product/ordering_product.dart';
-import 'package:carsa/ui/shoping_screen/shoping_screen.dart';
 import 'package:carsa/ui/splash_screen/splash_screen.dart';
 import 'package:carsa/ui/welcome_page/welcome_page.dart';
-import 'package:carsa/ui/workshops_screen/add_post_screen.dart';
-
 import 'package:easy_localization/easy_localization.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
@@ -38,6 +33,7 @@ import 'package:flutter_phoenix/flutter_phoenix.dart';
 import 'bloc/app_cubit/app_cubit.dart';
 import 'bloc/auth_cubit/auth_cubit.dart';
 import 'helpers/functions.dart';
+import 'helpers/helper_function.dart';
 import 'helpers/router.dart';
 
 // todo: add rate to product
@@ -74,6 +70,7 @@ AndroidNotificationChannel("key1", "chat");
 FlutterLocalNotificationsPlugin? flutterLocalNotificationsPlugin =
 FlutterLocalNotificationsPlugin();
 void main() async {
+  HttpOverrides.global = MyHttpOverrides();
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
    await EasyLocalization.ensureInitialized();
@@ -87,20 +84,7 @@ void main() async {
   FirebaseMessaging.onBackgroundMessage(_messageHandler);
   FirebaseMessaging.onMessageOpenedApp;
 
-  AwesomeNotifications().initialize('resource://drawable/ic_launcher', [
-    NotificationChannel(
-      channelKey: 'key1',
-      channelName: 'chat',
-      channelDescription: "Notification example",
-      defaultColor: Colors.transparent,
-      ledColor: Colors.blue,
-      channelShowBadge: true,
-      importance: NotificationImportance.High,
-      // playSound: true,
-      // enableLights:true,
-      // enableVibration: false
-    )
-  ]);
+ 
   runApp(
     EasyLocalization(
         supportedLocales: const [Locale("ar"), Locale("en")],
@@ -132,7 +116,7 @@ class MyApp extends StatelessWidget {
 
       ],
       child: MaterialApp(
-        title: 'Flutter Demo',
+        title: 'Car Sa',
         debugShowCheckedModeBanner: false,
         localizationsDelegates: context.localizationDelegates,
         supportedLocales: context.supportedLocales,

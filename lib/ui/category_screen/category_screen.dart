@@ -8,11 +8,11 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 import '../../helpers/constants.dart';
 import '../../helpers/functions.dart';
-import '../../helpers/router.dart';
+
 
 import '../../helpers/styles.dart';
 import '../../widgets/text_widget.dart';
-import 'componts/bar_category.dart';
+
 
 class CategoryScreen extends StatelessWidget {
   final CarModel carModel;

@@ -1,11 +1,8 @@
 import 'package:carsa/helpers/functions.dart';
-import 'package:carsa/helpers/styles.dart';
-import 'package:carsa/ui/my-orders-screen/my-orders-screen.dart';
-import 'package:carsa/ui/my_favorite_screen/my_favorite_screen.dart';
 import 'package:carsa/ui/search_screen/search_screen.dart';
 import 'package:carsa/widgets/custom_text.dart';
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
+
 
 import 'icon_bar.dart';
 

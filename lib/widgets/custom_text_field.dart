@@ -10,10 +10,10 @@ class CustomFormField extends StatelessWidget {
   final TextInputAction textInputAction;
   final TextEditingController controller;
   final int maxLines;
-  double radius;
+ final double radius;
  final int length;
-  bool isPhone;
-  bool isIcon;
+ final bool isPhone;
+ final bool isIcon;
 
   CustomFormField(
       {required this.headingText,

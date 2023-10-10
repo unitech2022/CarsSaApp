@@ -7,7 +7,7 @@ import '../../bloc/post_cubit/post_cubit.dart';
 import '../../helpers/functions.dart';
 import '../../helpers/helper_function.dart';
 import '../../helpers/styles.dart';
-import '../../models/post.dart';
+
 import '../../models/workshop_model.dart';
 import '../../widgets/custom_button.dart';
 import '../../widgets/custom_text_field.dart';

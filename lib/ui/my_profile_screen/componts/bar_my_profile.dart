@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../../bloc/app_cubit/app_cubit.dart';
-import '../../../bloc/cart_cubite/cart_cubit.dart';
+
 import '../../../helpers/styles.dart';
-import '../my_profile_screen.dart';
+
 import 'container_counter.dart';
 import 'container_image_and_name.dart';
 

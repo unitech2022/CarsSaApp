@@ -8,8 +8,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-
-import '../../bloc/post_cubit/post_cubit.dart';
 import '../../helpers/functions.dart';
 import '../../helpers/helper_function.dart';
 import '../../helpers/styles.dart';
@@ -30,7 +28,7 @@ class _WorkshopDetailsState extends State<WorkshopDetails> {
   final TextEditingController _controllerComment = TextEditingController();
   @override
   void initState() {
-    // TODO: implement initState
+
     super.initState();
     WorkshopCubit.get(context).getWorksById(widget.workshopId);
   }
@@ -134,12 +132,12 @@ class _WorkshopDetailsState extends State<WorkshopDetails> {
                               ,
                               GestureDetector(
                                 onTap: () {
-                                  HelperFunction().openGoogleMapLocation(
-                                      WorkshopCubit.get(context)
+                                  HelperFunction().openNewGoogleMapLocation(
+                                     lat: WorkshopCubit.get(context)
                                           .workshops!
                                           .workshop!
                                           .lat,
-                                      WorkshopCubit.get(context)
+                                   lng:   WorkshopCubit.get(context)
                                           .workshops!
                                           .workshop!
                                           .lng);

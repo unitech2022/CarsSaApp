@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:bloc/bloc.dart';
-import 'package:carsa/models/suggestion.dart';
 import 'package:carsa/ui/navigation/navigation_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';

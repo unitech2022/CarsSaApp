@@ -1,21 +1,14 @@
 import 'dart:convert';
 import 'dart:io';
-
 import 'package:bloc/bloc.dart';
 import 'package:carsa/bloc/workshops_cubit/workshop_state.dart';
 import 'package:carsa/models/response.dart';
-import 'package:carsa/models/suggestion.dart';
-import 'package:carsa/ui/navigation/navigation_screen.dart';
 import 'package:dio/dio.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:meta/meta.dart';
-
 import '../../helpers/constants.dart';
 import 'package:http/http.dart' as http;
-
 import '../../helpers/functions.dart';
 import '../../helpers/helper_function.dart';
 import '../../models/address.dart';
@@ -254,11 +247,11 @@ class WorkshopCubit extends Cubit<WorkshopState> {
 
     print(response.statusCode.toString() + "addWork");
     if (response.statusCode == 200) {
-      String jsonsDataString = await response.stream.bytesToString();
-      final jsonData = jsonDecode(jsonsDataString);
+      // String jsonsDataString = await response.stream.bytesToString();
+      // final jsonData = jsonDecode(jsonsDataString);
 
       loadAdd = false;
-      pushPage(context: context, page:  HomeScreen());
+      pushPage(context: context, page:  HomeScreenWorkShop());
       emit(AddWorkshopSuccess());
     } else {
       loadAdd = false;

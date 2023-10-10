@@ -5,10 +5,10 @@ class RatingBarWidget extends StatelessWidget {
   final bool ignorGesture;
   final double ratingValue;
   final int itemSize;
-  Color emptColor;
+ final Color emptColor;
   final direction;
-  Function onRate;
-  Color fillColor;
+ final Function onRate;
+ final Color fillColor;
   RatingBarWidget({required this.onRate,this.ignorGesture = true,this.itemSize=23,this.direction=TextDirection.ltr, required this.ratingValue,this.emptColor=Colors.white70,this.fillColor=Colors.yellow});
   @override
   Widget build(BuildContext context) {

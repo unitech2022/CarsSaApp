@@ -37,10 +37,10 @@ class ConfirmOrder extends StatelessWidget {
                 TextWidget3(
                   color: homeColor,
                   fontSize: 20,
-                  text: "تكلفة التوصيل : "+AppCubit.get(context)
+                  text: "تكلفة التوصيل : "+ AppCubit.get(context)
                       .homeModel
                       .sittings![2]
-                      .value!,
+                      .value! ,
                   fontFamliy: "pnuB",
                   isCustomColor: true,
                   alginText: TextAlign.center,
@@ -59,7 +59,7 @@ class ConfirmOrder extends StatelessWidget {
                 TextWidget3(
                   color: homeColor,
                   fontSize: 20,
-                  text: "اجمالي السعر : "+(CartCubit.get(context).total * .15 +double.parse(AppCubit.get(context)
+                  text: "اجمالي السعر : "+((CartCubit.get(context).total * .15 )+double.parse(AppCubit.get(context)
                       .homeModel
                       .sittings![2]
                       .value!)+CartCubit.get(context).total).toStringAsFixed(2)
@@ -128,10 +128,11 @@ class ConfirmOrder extends StatelessWidget {
                           AddressCubit.get(context).selectedRadio);
                       printFunction(CartCubit.get(context).total);
                       //
-double total= CartCubit.get(context).total * .15 + double.parse(AppCubit.get(context)
+double total= double.parse(AppCubit.get(context)
     .homeModel
     .sittings![2]
-    .value!)+CartCubit.get(context).total;
+    .value!) +  (CartCubit.get(context).total * .15)+CartCubit.get(context).total;
+      printFunction(total);
                       OrderCubit.get(context)
                           .addOrder(
                           price: total,

@@ -1,22 +1,29 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
 import '../../helpers/functions.dart';
 import '../../helpers/styles.dart';
 import '../../widgets/custom_button.dart';
-import '../../widgets/custom_drop_down_widget.dart';
 import '../../widgets/custom_text_field.dart';
 import '../../widgets/text_widget.dart';
-import '../add_car_screen/add_car_screen.dart';
 
-class OrderingProduct extends StatelessWidget {
-  String? currentValue;
+
+class OrderingProduct extends StatefulWidget {
+  @override
+  State<OrderingProduct> createState() => _OrderingProductState();
+}
+
+class _OrderingProductState extends State<OrderingProduct> {
+ String? currentValue;
+
   final _emailController = TextEditingController();
+
   final _nameController = TextEditingController();
 
   final _detProController = TextEditingController();
+
   final _nameProController = TextEditingController();
-  final List<String> _list = ["a", "b", "c"];
+
+  final List<String> list = ["a", "b", "c"];
 
   @override
   Widget build(BuildContext context) {

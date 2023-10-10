@@ -2,14 +2,10 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:carsa/helpers/constants.dart';
 import 'package:carsa/models/home_model.dart';
-
 import 'package:flutter/material.dart';
-
 import '../../../helpers/functions.dart';
-
 import '../../../helpers/styles.dart';
 import '../../details_product_screen/details_product_screen.dart';
-import '../../shoping_screen/shoping_screen.dart';
 import 'package:carousel_indicator/carousel_indicator.dart';
 
 class CarsoulWidget extends StatefulWidget {

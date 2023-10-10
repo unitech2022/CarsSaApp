@@ -10,7 +10,6 @@ import 'package:carsa/widgets/Texts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:url_launcher/url_launcher.dart';
 import '../../helpers/functions.dart';
 import '../../helpers/helper_function.dart';
 import '../../widgets/RatingBar.dart';
@@ -48,7 +47,7 @@ class _WorksShopsScreenState extends State<WorksShopsScreen> {
                   pushPage(context: context, page: MyAddsScreen());
                 },
                 child: const Text(
-                  "خدمات الورش",
+                  "عروض الورش للعملاء",
                   style: TextStyle(
                       color: homeColor,
                       fontFamily: "pnuB",

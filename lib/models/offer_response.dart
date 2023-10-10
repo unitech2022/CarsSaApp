@@ -1,5 +1,5 @@
 import 'package:carsa/models/comment.dart';
-import 'package:carsa/models/post.dart';
+
 import 'package:carsa/models/workshop_model.dart';
 
 import 'home_model.dart';

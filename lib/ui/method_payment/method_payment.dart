@@ -1,20 +1,11 @@
-import 'package:carsa/bloc/address_cubit/address_cubit.dart';
-import 'package:carsa/bloc/app_cubit/app_cubit.dart';
-import 'package:carsa/bloc/cart_cubite/cart_cubit.dart';
+
 import 'package:carsa/bloc/order_cubit/order_cubit.dart';
-import 'package:carsa/helpers/helper_function.dart';
-import 'package:carsa/helpers/router.dart';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import '../../helpers/functions.dart';
 import '../../helpers/styles.dart';
-import '../../models/address.dart';
-import '../../widgets/Texts.dart';
-import '../../widgets/custom_button.dart';
-import '../../widgets/custom_text.dart';
-import '../../widgets/text_widget.dart';
-import '../my-address_screen/map_screen.dart';
 import 'componts/confirm_order.dart';
 import 'componts/custom_stepper_container.dart';
 import 'componts/my_addresses.dart';

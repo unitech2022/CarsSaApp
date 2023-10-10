@@ -11,7 +11,7 @@ import '../../helpers/styles.dart';
 import '../../models/home_model.dart';
 import '../../widgets/text_widget.dart';
 import '../details_product_screen/details_product_screen.dart';
-import '../home_screen/componts/rating_best.dart';
+
 
 class AllProductsScreen extends StatefulWidget {
   const AllProductsScreen({Key? key}) : super(key: key);

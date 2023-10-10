@@ -1,8 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_html/flutter_html.dart';
 
-import '../../helpers/constants.dart';
-import '../../helpers/data.dart';
+import 'package:flutter/material.dart';
+
 import '../../helpers/functions.dart';
 import '../../helpers/styles.dart';
 
@@ -36,18 +34,16 @@ class _PrivacyPolicyScreenState extends State<PrivacyPolicyScreen> {
           ),
         ),
         title: Text(
-          widget.status == 1 ? "الشروط والأحكام" : widget.title,
+          widget.status == 1 ? " الشروط والأحكام و سياسة الخصوصية" : widget.title,
           style: TextStyle(color: homeColor, fontFamily: "pnuR", fontSize: 16),
         ),
       ),
       body: SingleChildScrollView(
         child: Padding(
           padding: EdgeInsets.symmetric(horizontal: 10, vertical: 20),
-          child:  SingleChildScrollView(
-        child: Html(
-        data: htmlData,
-      ),
-      ),
+          child:  Text(
+           widget.value, style: TextStyle(color: homeColor,fontSize: 18),
+              ),
         ),
       ),
     );

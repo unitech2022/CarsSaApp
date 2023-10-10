@@ -4,7 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../widgets/custom_button.dart';
-import '../../widgets/custom_drop_down_widget.dart';
+
 import '../../widgets/text_widget.dart';
 
 class AddCarScreen extends StatefulWidget {

@@ -2,13 +2,11 @@ import 'package:carsa/bloc/post_cubit/post_cubit.dart';
 import 'package:carsa/helpers/functions.dart';
 import 'package:carsa/helpers/helper_function.dart';
 import 'package:carsa/helpers/styles.dart';
-import 'package:carsa/models/post.dart';
 import 'package:carsa/ui/my_adds_screen/my_adds_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../../models/workshop_model.dart';
 import '../../../widgets/custom_button.dart';
 import '../../../widgets/custom_text_field.dart';

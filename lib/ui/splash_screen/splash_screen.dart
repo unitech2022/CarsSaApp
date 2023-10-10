@@ -1,14 +1,13 @@
 import 'dart:async';
 
-import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:carsa/helpers/constants.dart';
-import 'package:carsa/helpers/styles.dart';
+
 import 'package:carsa/ui/welcome_page/welcome_page.dart';
 import 'package:carsa/work_shop_medul/screens/home_screen/home_screen.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import '../../bloc/app_cubit/app_cubit.dart';
+
 import '../../helpers/functions.dart';
 import '../login_screen/login_screen.dart';
 import '../navigation/navigation_screen.dart';
@@ -49,7 +48,7 @@ class _SplashScreenState extends State<SplashScreen> {
         if (role == "user") {
           replacePage(context: context, page: const NavigationScreen());
         } else {
-          replacePage(context: context, page: HomeScreen());
+          replacePage(context: context, page: HomeScreenWorkShop());
         }
       } else {
         replacePage(context: context, page: const LoginScreen());

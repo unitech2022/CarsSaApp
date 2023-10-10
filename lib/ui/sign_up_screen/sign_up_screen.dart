@@ -1,19 +1,17 @@
-import 'package:carsa/bloc/app_cubit/app_cubit.dart';
+
 import 'package:carsa/helpers/functions.dart';
 import 'package:carsa/helpers/helper_function.dart';
-
 import 'package:carsa/helpers/styles.dart';
 import 'package:carsa/ui/otp_screen/otp_screen.dart';
 import 'package:carsa/widgets/custom_button.dart';
 import 'package:carsa/widgets/custom_text.dart';
 import 'package:carsa/widgets/custom_text_field.dart';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../bloc/auth_cubit/auth_cubit.dart';
 import '../login_screen/login_screen.dart';
-import '../privacy_policy/privacy_policy_screen.dart';
+import '../privacy_html_screen/privacy_html_screen/privacy_html_screen.dart';
+
 
 class SignUpScreen extends StatefulWidget {
   final String phone, code;
@@ -294,11 +292,9 @@ class _SignUpScreenState extends State<SignUpScreen> {
                             onPressed: () {
                               pushPage(
                                   context: context,
-                                  page: PrivacyPolicyScreen(
-                                    value: "",
-                                    title: "",
-                                    status: 1,
-                                  ));
+                                  page:  PrivacyHtmlScreen(
+                               
+                              ));
                             },
                             child: const Text(
                               "أوافق علي الشروط والأحكام",
